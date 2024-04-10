@@ -1,9 +1,4 @@
 "use strict";
-//Aufgabe <L01_RandomPoem>
-//Jonas Gissler
-//Matrikelnummer: 275577
-//Datum: 29.03.24
-//Quellen: Jonas Bausch, Albert Wirz, ChatGPT
 var RandomVers;
 (function (RandomVers) {
     // Arrays für Subjekte, Verben und Objekten
@@ -11,24 +6,24 @@ var RandomVers;
     RandomVers.Verben = ["erfindet", "liebt", "hasst", "studiert", "mag", "braucht"];
     RandomVers.Objekte = ["Ideen", "Essen", "Mathe", "Cannabis", "TypeScript", "Red Bull"];
     // Funktion getVers
-    function getVers() {
+    function getVers(_subjekt, _verben, _objekte) {
         let Vers = ""; // Variable für den Vers
         // Zufällige Subjekte, Verben und Objekte
-        let randomSubjekt = (Math.random() * RandomVers.Subjekte.length);
-        let randomVerb = (Math.random() * RandomVers.Verben.length);
-        let randomObjekt = (Math.random() * RandomVers.Objekte.length);
+        let randomSubjekt = Math.floor(Math.random() * _subjekt.length);
+        let randomVerb = Math.floor(Math.random() * _verben.length);
+        let randomObjekt = Math.floor(Math.random() * _objekte.length);
         // Zusammenstellen des Verses
-        Vers += RandomVers.Subjekte.splice(randomSubjekt, 1)[0];
-        Vers += " " + RandomVers.Verben.splice(randomVerb, 1)[0];
-        Vers += " " + RandomVers.Objekte.splice(randomObjekt, 1)[0];
+        Vers += _subjekt[randomSubjekt];
+        Vers += " " + _verben[randomVerb];
+        Vers += " " + _objekte[randomObjekt];
         return Vers;
     }
     RandomVers.getVers = getVers;
+    // For-Schleife 
+    for (let i = RandomVers.Subjekte.length; i > 0; i--) {
+        console.log(i);
+        let Vers = getVers(RandomVers.Subjekte.slice(), RandomVers.Verben.slice(), RandomVers.Objekte.slice());
+        console.log(Vers);
+    }
 })(RandomVers || (RandomVers = {}));
-// For-Schleife 
-for (let i = RandomVers.Subjekte.length; i >= 1; i--) {
-    console.log(i);
-    let Vers = RandomVers.getVers();
-    console.log(Vers);
-}
 //# sourceMappingURL=index.js.map

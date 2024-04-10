@@ -1,0 +1,65 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    background-color: rgb(37, 37, 37);
+}
+
+
+.container {
+    display: flex;
+    
+}
+
+.div0, .div1 {
+    flex: 1;
+    box-sizing: border-box;
+    border: 1px solid rgb(31, 136, 202);
+    position: relative;
+}
+
+.div0::before, .div1::before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}
+
+
+h1 {
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+    animation: floatAnimation 3s infinite ease-in-out;
+    text-shadow: 0 0 10px rgba(248, 247, 241);
+    color: rgb(248, 247, 241);
+    font-family: Consolas, monaco, monospace;
+  }
+  
+  h1:hover {
+    transform: translateY(-5px);
+    animation: none;
+    text-shadow: 0 0 20px rgba(248, 247, 241);
+  }
+  
+  /* Animation für das Schweben der Überschrift */
+  @keyframes floatAnimation {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
