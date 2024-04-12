@@ -12,18 +12,20 @@ body {
     background-color: rgb(37, 37, 37);
 }
 
-
 .container {
     display: flex;
     
 }
 
 .div0, .div1 {
-    flex: 1;
-    box-sizing: border-box;
-    border: 1px solid rgb(31, 136, 202);
-    position: relative;
+  flex: 1;
+  box-sizing: border-box;
+  border: 2px solid rgb(31, 136, 202); 
+  position: relative;
+  margin: 20px;
+  background-color: rgba(7, 61, 148, 0.07); 
 }
+
 
 .div0::before, .div1::before {
     content: "";
@@ -39,6 +41,7 @@ body {
 
 
 h1 {
+    justify-content: left;
     cursor: pointer;
     transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
     animation: floatAnimation 3s infinite ease-in-out;
@@ -53,7 +56,6 @@ h1 {
     text-shadow: 0 0 20px rgba(248, 247, 241);
   }
   
-  /* Animation für das Schweben der Überschrift */
   @keyframes floatAnimation {
     0%, 100% {
       transform: translateY(0);
@@ -63,3 +65,22 @@ h1 {
     }
   }
 
+  .spanelementcontainer {
+    flex: 1;
+    box-sizing: border-box;
+    border: 1.5px solid rgb(255, 255, 255);
+    position: relative;
+    top: -150px;
+    left: 100px;
+    width: 150px; 
+    height: 100px; 
+    background-color: rgb(16, 95, 191);
+    position: fixed; 
+    z-index: 999; 
+    pointer-events: none; 
+    color: antiquewhite;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    justify-content: center;
+    align-content: center;   
+}
