@@ -50,3 +50,31 @@ function logEventDetails(event: Event) {
 }
 
 
+    // Eventlistener für Tastendruckereignis
+    document.addEventListener('keyup', (event) => {
+        logEventDetails(event);
+
+        // Überprüfe, ob die Taste "e" gedrückt wurde
+        if (event.key === 'e') {
+            // Zufällige Farben generieren
+            let randomColor = getRandomColor();
+            let randomBackgroundColor = getRandomColor();
+
+            // Ändere die Farbe der h1-Überschrift und des Hintergrunds
+            let h1Element = document.querySelector('h1');
+            if (h1Element) {
+                h1Element.style.color = randomColor; // Farbe der Überschrift ändern
+                document.body.style.backgroundColor = randomBackgroundColor; // Hintergrundfarbe ändern
+            }
+        }
+    });
+//Funktion um random Farbe für h1 und den background zu generieren
+    function getRandomColor(): string {
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random() * 256);
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+    
+
+
