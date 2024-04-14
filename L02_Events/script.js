@@ -64,6 +64,7 @@ function getRandomColor() {
     let r = Math.floor(Math.random() * 256);
     let g = Math.floor(Math.random() * 256);
     let b = Math.floor(Math.random() * 256);
+    console.log(r, g, b);
     return `rgb(${r}, ${g}, ${b})`;
 }
 //# sourceMappingURL=script.js.map
