@@ -1,3 +1,7 @@
+// Name: Jonas Gissler     
+// Matrikel: 275577
+// Quellen: Jonas Bausch, ChatGPT
+
 document.addEventListener('DOMContentLoaded', function () {
     // Das blaue span-Element für die Mausposition
     let spanElement = document.createElement('div');

@@ -1,3 +1,7 @@
+// Name: Jonas Gissler     
+// Matrikel: 275577
+// Quellen: Jonas Bausch, ChatGPT
+
 namespace RandomVers {
     // Arrays für Subjekte, Verben und Objekten
     export let Subjekte: string[] = ["Robin", "Albert", "Tarik", "Kevin", "Joe", "Robert"];
