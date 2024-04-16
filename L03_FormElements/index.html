@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Shopping List</h1>
+        <button id="addItemBtn" class="btn btn-primary mb-4">Add Item</button>
+        <ul id="shopping-list" class="list-group">
+            <!-- Placeholder items -->
+            <li class="list-group-item" data-name="Apples" data-quantity="5" data-last-purchase="2024-04-15" data-comment="Granny Smith">Apples - Qty: 5, Last purchase: 2024-04-15, Comment: Granny Smith</li>
+            <li class="list-group-item" data-name="Milk" data-quantity="1" data-last-purchase="2024-04-13" data-comment="1L, Semi-skimmed">Milk - Qty: 1, Last purchase: 2024-04-13, Comment: 1L, Semi-skimmed</li>
+        </ul>
+    </div>
+
+    <!-- Modal for adding new item -->
+    <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="addItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addItemModalLabel">Add New Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addItemForm">
+                        <div class="form-group">
+                            <label for="itemName">Name</label>
+                            <input type="text" class="form-control" id="itemName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemQuantity">Quantity</label>
+                            <input type="number" class="form-control" id="itemQuantity" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemComment">Comment</label>
+                            <input type="text" class="form-control" id="itemComment">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

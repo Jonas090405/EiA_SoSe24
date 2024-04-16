@@ -1,0 +1,46 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+li::after {
+    content: " - Next purchase: Yes"; /* Placeholder for next purchase status */
+}
+
+
+/* styles.css */
+
+/* Zentriert das Modal vertikal und horizontal */
+.modal-dialog {
+    margin: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Passe die Größe des Modals an */
+.modal-content {
+    width: 90%;
+    max-width: 500px; /* Maximale Breite des Modals */
+    margin: auto; /* Zentriert den Inhalt im Modal */
+}
+
+/* Passe die Größe des Modals für kleinere Bildschirme an */
+@media (max-width: 576px) {
+    .modal-content {
+        width: 95%;
+    }
+}
