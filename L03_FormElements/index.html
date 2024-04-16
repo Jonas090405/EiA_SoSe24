@@ -9,12 +9,20 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="mt-5 mb-4">Shopping List</h1>
-        <button id="addItemBtn" class="btn btn-primary mb-4">Add Item</button>
+        <h1 class="mt-5 mb-4 text-center">Shopping List</h1>
+        <div class="d-flex justify-content-center mb-4">
+            <button id="addItemBtn" class="btn btn-primary">Add Item</button>
+        </div>
         <ul id="shopping-list" class="list-group">
             <!-- Placeholder items -->
-            <li class="list-group-item" data-name="Apples" data-quantity="5" data-last-purchase="2024-04-15" data-comment="Granny Smith">Apples - Qty: 5, Last purchase: 2024-04-15, Comment: Granny Smith</li>
-            <li class="list-group-item" data-name="Milk" data-quantity="1" data-last-purchase="2024-04-13" data-comment="1L, Semi-skimmed">Milk - Qty: 1, Last purchase: 2024-04-13, Comment: 1L, Semi-skimmed</li>
+            <li class="list-group-item d-flex align-items-center" data-name="Apples" data-quantity="5" data-last-purchase="2024-04-15" data-comment="Granny Smith">
+                <input type="checkbox" class="mr-3 shopping-checkbox">
+                Apples - Qty: 5, Last purchase: 2024-04-15, Comment: Granny Smith
+            </li>
+            <li class="list-group-item d-flex align-items-center" data-name="Milk" data-quantity="1" data-last-purchase="2024-04-13" data-comment="1L, Semi-skimmed">
+                <input type="checkbox" class="mr-3 shopping-checkbox">
+                Milk - Qty: 1, Last purchase: 2024-04-13, Comment: 1L, Semi-skimmed
+            </li>
         </ul>
     </div>
 
