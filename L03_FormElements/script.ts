@@ -1,9 +1,14 @@
+// Name: Jonas Gissler     
+// Matrikel: 275577
+// Quellen: ChatGPT
+
+
 // ShoppingItem Klasse zur Repräsentation von Einkaufslisten-Einträgen
 class ShoppingItem {
     constructor(
         public name: string,
         public quantity: number,
-        public lastPurchase: string,
+        public Date: string,
         public comment: string
     ) {}
 
@@ -13,9 +18,9 @@ class ShoppingItem {
         item.classList.add('list-group-item');
         item.dataset.name = this.name;
         item.dataset.quantity = this.quantity.toString();
-        item.dataset.lastPurchase = this.lastPurchase;
+        item.dataset.Date = this.Date;
         item.dataset.comment = this.comment;
-        item.textContent = `${this.name} - Qty: ${this.quantity}, Last purchase: ${this.lastPurchase}, Comment: ${this.comment}`;
+        item.textContent = `${this.name} - Menge: ${this.quantity}, Datum: ${this.Date}, Kommentar: ${this.comment}`;
         return item;
     }
 }
@@ -50,11 +55,7 @@ document.getElementById('addItemForm')!.addEventListener('submit', (event) => {
         const newList = document.getElementById('shopping-list')!;
         newList.appendChild(newItem.render());
         // Verstecke das Modal für das Hinzufügen eines neuen Elements
-        const addItemModal = document.getElementById('addItemModal')!;
-        addItemModal.classList.remove('show');
-        addItemModal.setAttribute('aria-hidden', 'true');
-        addItemModal.style.display = 'none';
-        document.body.classList.remove('modal-open');
+        GoBack();
         console.log(`New item "${name}" added to the list.`);
         // Form zurücksetzen
         nameInput.value = '';
@@ -76,9 +77,36 @@ function getCurrentDate(): string {
 
 // Eventlistener für den "Add Item" Button
 document.getElementById('addItemBtn')!.addEventListener('click', () => {
+    showAddItemModal();
+});
+
+// Funktion zum Anzeigen des "Add Item" Modals
+function showAddItemModal() {
     const addItemModal = document.getElementById('addItemModal')!;
     addItemModal.classList.add('show');
     addItemModal.setAttribute('aria-hidden', 'false');
     addItemModal.style.display = 'block';
     document.body.classList.add('modal-open');
+}
+
+// Funktion zum Verstecken des "Add Item" Modals
+function GoBack() {
+    const addItemModal = document.getElementById('addItemModal')!;
+    addItemModal.classList.remove('show');
+    addItemModal.setAttribute('aria-hidden', 'true');
+    addItemModal.style.display = 'none';
+    document.body.classList.remove('modal-open');
+}
+
+// Eventlistener für den Zurück-Button bzw. das Schließen-Icon im "Add Item" Modal
+const closeButton = document.querySelector('#addItemModal .close')!;
+closeButton.addEventListener('click', () => {
+    GoBack();
+});
+
+// Eventlistener für Klicks außerhalb des Modals, um das Modal zu schließen
+window.addEventListener('click', (event) => {
+    if (event.target === document.getElementById('addItemModal')) {
+        GoBack();
+    }
 });

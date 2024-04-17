@@ -1,4 +1,7 @@
 "use strict";
+// Name: Jonas Gissler     
+// Matrikel: 275577
+// Quellen: Jonas Bausch, ChatGPT
 var RandomVers;
 (function (RandomVers) {
     // Arrays für Subjekte, Verben und Objekten
