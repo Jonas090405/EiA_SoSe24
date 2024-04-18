@@ -1,9 +1,3 @@
-// Name: Jonas Gissler     
-// Matrikel: 275577
-// Quellen: ChatGPT
-
-
-// ShoppingItem Klasse zur Repräsentation von Einkaufslisten-Einträgen
 class ShoppingItem {
     constructor(
         public name: string,
@@ -14,14 +8,96 @@ class ShoppingItem {
 
     // Methode zur Erstellung der HTML-Repräsentation des Eintrags
     render(): HTMLElement {
-        const item = document.createElement('li');
+        let item = document.createElement('li');
         item.classList.add('list-group-item');
         item.dataset.name = this.name;
         item.dataset.quantity = this.quantity.toString();
         item.dataset.Date = this.Date;
         item.dataset.comment = this.comment;
-        item.textContent = `${this.name} - Menge: ${this.quantity}, Datum: ${this.Date}, Kommentar: ${this.comment}`;
-        return item;
+
+        // Container für Inhalt und Buttons erstellen
+        const contentContainer = document.createElement('div');
+        contentContainer.classList.add('content-container');
+
+        // Textinhalt des Listenelements setzen
+        const textContent = document.createElement('span');
+        textContent.textContent = `${this.name} - Menge: ${this.quantity}, Datum: ${this.Date}, Kommentar: ${this.comment}`;
+        contentContainer.appendChild(textContent);
+
+        // Editier-Button hinzufügen
+        const editButton = document.createElement('button');
+        editButton.classList.add('btn', 'btn-sm', 'btn-primary', 'edit-item', 'ml-2');
+        editButton.textContent = 'Edit';
+        contentContainer.appendChild(editButton);
+
+        // Löschen-Button hinzufügen
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('btn', 'btn-sm', 'btn-danger', 'delete-item', 'ml-2');
+        deleteButton.textContent = 'Delete';
+        contentContainer.appendChild(deleteButton);
+
+        // Checkbox hinzufügen
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.classList.add('form-check-input', 'ml-2');
+        contentContainer.appendChild(checkbox);
+
+        // Content-Container dem Listenelement hinzufügen
+        item.appendChild(contentContainer);
+
+        return item;        
+    }
+
+}
+
+// Funktion zum Hinzufügen eines Listenelements
+function addItemToList(item: HTMLElement) {
+    let shoppingList = document.getElementById('shopping-list')!;
+    shoppingList.appendChild(item);
+
+    // Eventlistener für den Edit-Button hinzufügen
+    let editButton = item.querySelector('.edit-item')!;
+    editButton.addEventListener('click', () => {
+        editItem(item);
+    });
+
+    // Eventlistener für den Löschen-Button hinzufügen
+    let deleteButton = item.querySelector('.delete-item')!;
+    deleteButton.addEventListener('click', () => {
+        deleteItem(item);
+    });
+}
+
+// Funktion zum Bearbeiten eines Listenelements
+function editItem(item: HTMLElement) {
+    const name = item.dataset.name!;
+    const quantity = parseInt(item.dataset.quantity!);
+    const date = item.dataset.date!;
+    const comment = item.dataset.comment!;
+
+    // Hier kannst du Logik zum Bearbeiten des Elements implementieren, z.B. das Befüllen des Formulars im Modal mit den vorhandenen Daten
+    const nameInput = document.getElementById('itemName') as HTMLInputElement;
+    const quantityInput = document.getElementById('itemQuantity') as HTMLInputElement;
+    const commentInput = document.getElementById('itemComment') as HTMLInputElement;
+
+    nameInput.value = name;
+    quantityInput.value = quantity.toString();
+    commentInput.value = comment;
+
+    // Scrollen zum Anfang des Formulars, um das Bearbeiten zu erleichtern
+    nameInput.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Öffnen des Modal-Menüs zum Bearbeiten
+    showAddItemModal();
+}
+
+// Funktion zum Löschen eines Listenelements
+function deleteItem(item: HTMLElement) {
+    const name = item.dataset.name!;
+    // Hier kannst du Logik zum Löschen des Elements implementieren, z.B. eine Bestätigungsabfrage und anschließendes Entfernen des Elements aus der Liste
+    if (confirm(`Are you sure you want to delete "${name}"?`)) {
+        item.remove();
+        console.log(`Item "${name}" deleted.`);
     }
 }
 
@@ -31,29 +107,20 @@ function markAsBought(item: HTMLElement) {
     item.remove(); // Element aus der Liste entfernen
 }
 
-// Eventlistener für das Markieren eines Elements als gekauft
-document.getElementById('shopping-list')!.addEventListener('click', (event) => {
-    const target = event.target as HTMLElement;
-    if (target.tagName === 'LI') {
-        markAsBought(target);
-    }
-});
-
 // Eventlistener für das Hinzufügen eines neuen Eintrags
 document.getElementById('addItemForm')!.addEventListener('submit', (event) => {
     event.preventDefault();
-    const nameInput = document.getElementById('itemName') as HTMLInputElement;
-    const quantityInput = document.getElementById('itemQuantity') as HTMLInputElement;
-    const commentInput = document.getElementById('itemComment') as HTMLInputElement;
+    let nameInput = document.getElementById('itemName') as HTMLInputElement;
+    let quantityInput = document.getElementById('itemQuantity') as HTMLInputElement;
+    let commentInput = document.getElementById('itemComment') as HTMLInputElement;
 
-    const name = nameInput.value.trim();
-    const quantity = parseInt(quantityInput.value);
-    const comment = commentInput.value.trim();
+    let name = nameInput.value.trim();
+    let quantity = parseInt(quantityInput.value);
+    let comment = commentInput.value.trim();
 
     if (name && quantity) {
-        const newItem = new ShoppingItem(name, quantity, getCurrentDate(), comment);
-        const newList = document.getElementById('shopping-list')!;
-        newList.appendChild(newItem.render());
+        let newItem = new ShoppingItem(name, quantity, getCurrentDate(), comment);
+        addItemToList(newItem.render()); // Hinzufügen des neuen Elements zur Liste
         // Verstecke das Modal für das Hinzufügen eines neuen Elements
         GoBack();
         console.log(`New item "${name}" added to the list.`);
@@ -68,10 +135,10 @@ document.getElementById('addItemForm')!.addEventListener('submit', (event) => {
 
 // Funktion zur Bereitstellung des aktuellen Datums im Format "YYYY-MM-DD"
 function getCurrentDate(): string {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = (today.getMonth() + 1).toString().padStart(2, '0');
-    const day = today.getDate().toString().padStart(2, '0');
+    let today = new Date();
+    let year = today.getFullYear();
+    let month = (today.getMonth() + 1).toString().padStart(2, '0');
+    let day = today.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
 }
 
@@ -82,7 +149,7 @@ document.getElementById('addItemBtn')!.addEventListener('click', () => {
 
 // Funktion zum Anzeigen des "Add Item" Modals
 function showAddItemModal() {
-    const addItemModal = document.getElementById('addItemModal')!;
+    let addItemModal = document.getElementById('addItemModal')!;
     addItemModal.classList.add('show');
     addItemModal.setAttribute('aria-hidden', 'false');
     addItemModal.style.display = 'block';
@@ -91,7 +158,7 @@ function showAddItemModal() {
 
 // Funktion zum Verstecken des "Add Item" Modals
 function GoBack() {
-    const addItemModal = document.getElementById('addItemModal')!;
+    let addItemModal = document.getElementById('addItemModal')!;
     addItemModal.classList.remove('show');
     addItemModal.setAttribute('aria-hidden', 'true');
     addItemModal.style.display = 'none';
@@ -99,7 +166,7 @@ function GoBack() {
 }
 
 // Eventlistener für den Zurück-Button bzw. das Schließen-Icon im "Add Item" Modal
-const closeButton = document.querySelector('#addItemModal .close')!;
+let closeButton = document.querySelector('#addItemModal .close')!;
 closeButton.addEventListener('click', () => {
     GoBack();
 });
