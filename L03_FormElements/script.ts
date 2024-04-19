@@ -39,8 +39,17 @@ class ShoppingItem {
         // Checkbox hinzufügen
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
-        checkbox.classList.add('form-check-input', 'ml-2');
+        checkbox.classList.add('form-check-input', 'ml-auto');
         contentContainer.appendChild(checkbox);
+
+        // Eventlistener für die Checkbox hinzufügen
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                item.style.backgroundColor = 'lightgreen'; // Hintergrundfarbe auf Grün setzen
+            } else {
+                item.style.backgroundColor = ''; // Hintergrundfarbe zurücksetzen
+            }
+        });
 
         // Content-Container dem Listenelement hinzufügen
         item.appendChild(contentContainer);
@@ -153,6 +162,7 @@ function showAddItemModal() {
     addItemModal.classList.add('show');
     addItemModal.setAttribute('aria-hidden', 'false');
     addItemModal.style.display = 'block';
+    addItemModal.style.left = '0'; // Verschieben des Pop-up-Menüs nach links
     document.body.classList.add('modal-open');
 }
 
