@@ -1,3 +1,6 @@
+// Name: Jonas Gissler     
+// Matrikel: 275577
+// Quellen: ChatGPT
 class ShoppingItem {
     constructor(
         public name: string,

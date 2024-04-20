@@ -1,4 +1,7 @@
 "use strict";
+// Name: Jonas Gissler     
+// Matrikel: 275577
+// Quellen: ChatGPT
 class ShoppingItem {
     name;
     quantity;
