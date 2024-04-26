@@ -1,0 +1,75 @@
+/* styles.css */
+
+body.shopping-list-app {
+    background-color: rgb(42, 42, 42) !important; /* Dunkle Hintergrundfarbe */
+}
+
+.h1{
+color: whitesmoke;
+font-size: xx-large;
+text-align: center;
+justify-content: center;
+cursor: pointer;
+transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+animation: floatAnimation 3s infinite ease-in-out;
+text-shadow: 0 0 10px rgba(248, 247, 241);
+
+}
+  
+h1:hover {
+    transform: translateY(-5px);
+    animation: none;
+    text-shadow: 0 0 20px rgba(248, 247, 241);
+  }
+  
+  @keyframes floatAnimation {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Zentriert das Modal vertikal und horizontal */
+.modal-dialog {
+    margin: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto;
+
+}
+
+/* Passe die Größe des Modals an */
+.modal-content {
+    width: 90%;
+    max-width: 500px; /* Maximale Breite des Modals */
+    margin: auto; /* Zentriert den Inhalt im Modal */
+    background-color: rgb(255, 255, 255);
+}
+
+/* Passe die Größe des Modals für kleinere Bildschirme an */
+@media (max-width: 576px) {
+    .modal-content {
+        width: 95%;
+    }
+}
