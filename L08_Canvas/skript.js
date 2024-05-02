@@ -89,7 +89,7 @@ function drawRandomShape() {
 // Funktion zum Zeichnen der Formen nach dem Laden der Seite
 function drawShapesAfterLoad() {
     // Anzahl der Formen, die gezeichnet werden sollen
-    const numShapes = 710;
+    const numShapes = 550;
     // Schleife zum Zeichnen der Formen
     for (let i = 0; i < numShapes; i++) {
         drawRandomShape();
