@@ -20,97 +20,67 @@ function getRandomColor(): string {
     return '#' + (Math.random().toString(16) + '000000').slice(2, 8);
 }
 
-// Funktion zum Zeichnen einer zufälligen geometrischen Form mit Farbverlauf
-function drawRandomShape() {
-    // Zufällige Form wählen
-    let shapeType = Math.floor(Math.random() * 6);
+// Funktion zum Generieren eines zufälligen Farbverlaufs mit drei Farben
+function getRandomGradient(): CanvasGradient {
+    let color1: string = getRandomColor();
+    let color2: string = getRandomColor();
+    let color3: string = getRandomColor();
 
-    // Zufällige Position und Größe generieren
-    let x = Math.random() * canvas.width;
-    let y = Math.random() * canvas.height;
-    let size = Math.random() * 100 + 20;
-
-    // Zufällige Farben für den Farbverlauf wählen
-    let color1 = getRandomColor();
-    let color2 = getRandomColor();
-
-    // Farbverlauf erstellen
-    let gradient = crc2.createLinearGradient(x, y, x + size, y + size);
+    let gradient = crc2.createLinearGradient(0, 0, canvas.width, canvas.height);
     gradient.addColorStop(0, color1);
-    gradient.addColorStop(1, color2);
+    gradient.addColorStop(0.5, color2);
+    gradient.addColorStop(1, color3);
 
-    // Form zeichnen
-    crc2.beginPath();
-    switch (shapeType) {
-        case 0:
-            // Rechteck mit Farbverlauf
-            crc2.fillStyle = gradient;
-            crc2.fillRect(x, y, size, size);
-            break;
-        case 1:
-            // Kreis mit Farbverlauf
-            crc2.fillStyle = gradient;
-            crc2.arc(x, y, size / 2, 0, 2 * Math.PI);
-            crc2.fill();
-            break;
-        case 2:
-            // Dreieck mit Farbverlauf
-            crc2.fillStyle = gradient;
-            crc2.moveTo(x, y);
-            crc2.lineTo(x + size, y);
-            crc2.lineTo(x + size / 2, y + size);
-            crc2.closePath();
-            crc2.fill();
-            break;
-        case 3:
-            // Linie mit Farbverlauf
-            crc2.strokeStyle = gradient;
-            crc2.lineWidth = Math.random() * 5;
-            crc2.beginPath();
-            crc2.moveTo(x, y);
-            crc2.lineTo(x + size, y + size);
-            crc2.stroke();
-            break;
-        case 4:
-            // Ellipse mit Farbverlauf
-            crc2.fillStyle = gradient;
-            crc2.ellipse(x, y, size, size / 2, Math.random() * Math.PI, 0, 2 * Math.PI);
-            crc2.fill();
-            break;
-        case 5:
-            // Polygon mit Farbverlauf
-            crc2.fillStyle = gradient;
-            crc2.beginPath();
-            let numSides = Math.floor(Math.random() * 6) + 3; // Zufällige Anzahl von Seiten zwischen 3 und 8
-            let angle = Math.PI * 2 / numSides;
-            for (let i = 0; i < numSides; i++) {
-                let px = x + size * Math.cos(i * angle);
-                let py = y + size * Math.sin(i * angle);
-                crc2.lineTo(px, py);
-            }
-            crc2.closePath();
-            crc2.fill();
-            break;
-        default:
-            break;
-    }
+    return gradient;
 }
 
-// Funktion zum Zeichnen der Formen nach dem Laden der Seite
-function drawShapesAfterLoad() {
-    // Anzahl der Formen, die gezeichnet werden sollen
-    const numShapes = 550;
+// Funktion zum Zeichnen zufällig gekrümmter Linien mit variabler Dicke und Farbverlauf
+function drawRandomCurvedLines() {
+    // Zufällige Start- und Endpunkte generieren
+    let startX: number = Math.random() * canvas.width;
+    let startY: number = Math.random() * canvas.height;
+    let endX: number = Math.random() * canvas.width;
+    let endY: number = Math.random() * canvas.height;
 
-    // Schleife zum Zeichnen der Formen
-    for (let i = 0; i < numShapes; i++) {
-        drawRandomShape();
+    // Zufällige Steuerpunkte für die Bézierkurve generieren
+    let controlX1: number = Math.random() * canvas.width;
+    let controlY1: number = Math.random() * canvas.height;
+    let controlX2: number = Math.random() * canvas.width;
+    let controlY2: number = Math.random() * canvas.height;
+
+    // Zufällige Linienbreite generieren
+    let lineWidth: number = Math.random() * 10 + 1;
+
+    // Zufälligen Farbverlauf für die Linie generieren
+    let lineGradient = getRandomGradient();
+
+    // Linienstil setzen
+    crc2.strokeStyle = lineGradient;
+    crc2.lineWidth = lineWidth;
+    crc2.lineCap = "round"; // Runde Enden für die Linien
+
+    // Linie zeichnen
+    crc2.beginPath();
+    crc2.moveTo(startX, startY);
+    crc2.bezierCurveTo(controlX1, controlY1, controlX2, controlY2, endX, endY);
+    crc2.stroke();
+}
+
+// Funktion zum Zeichnen der Linien nach dem Laden der Seite
+function drawLinesAfterLoad() {
+    // Anzahl der Linien, die gezeichnet werden sollen
+    const numLines: number = 87;
+
+    // Schleife zum Zeichnen der Linien
+    for (let i = 0; i < numLines; i++) {
+        drawRandomCurvedLines();
     }
 }
 
 // Canvas-Größe beim Laden der Seite und bei Änderungen der Fenstergröße anpassen
 window.addEventListener('load', () => {
     resizeCanvas();
-    drawShapesAfterLoad(); // Zeichne die Formen, nachdem das Canvas geladen wurde
+    drawLinesAfterLoad(); // Zeichne die Linien, nachdem das Canvas geladen wurde
 });
 
 window.addEventListener('resize', resizeCanvas);
