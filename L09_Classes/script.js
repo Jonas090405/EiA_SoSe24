@@ -1,4 +1,7 @@
 "use strict";
+// Name: Jonas Gissler
+// Matrikel: 275577
+// Quelle: ChatGPT
 var CreativeArt;
 (function (CreativeArt) {
     window.addEventListener("load", startDrawing);

@@ -1,3 +1,8 @@
+// Name: Jonas Gissler
+// Matrikel: 275577
+// Quelle: ChatGPT
+
+
 namespace CreativeArt {
     interface TwoDVector {
         x: number;
