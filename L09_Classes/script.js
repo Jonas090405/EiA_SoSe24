@@ -45,6 +45,8 @@ var CreativeArt;
         drawClouds(backgroundContext, { x: 500, y: 125 }, { x: 250, y: 75 });
         drawMountains(backgroundContext, { x: 0, y: horizon }, 75, 200, "lightgrey", "grey");
         drawMountains(backgroundContext, { x: 0, y: horizon }, 50, 150, "lightgrey", "grey");
+        drawGrass(backgroundContext, { x: 0, y: horizon }, backgroundCanvas.width, backgroundCanvas.height - horizon, "green");
+        drawLake(backgroundContext, { x: backgroundCanvas.width / 2, y: horizon + 150 }, 400, 100, "blue");
     }
     function drawSky(context) {
         console.log("Background");
