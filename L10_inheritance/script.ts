@@ -142,7 +142,7 @@ namespace CreativeArt {
         setInterval(() => {
             moveObjects();
             redrawScene();
-        }, 100);
+        }, 10);
     }
 
     function drawBackground(): void {

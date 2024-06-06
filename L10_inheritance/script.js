@@ -112,7 +112,7 @@ var CreativeArt;
         setInterval(() => {
             moveObjects();
             redrawScene();
-        }, 100);
+        }, 10);
     }
     function drawBackground() {
         let horizon = backgroundContext.canvas.height * 0.46;
